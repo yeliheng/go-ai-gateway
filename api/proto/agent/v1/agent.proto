@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package agent.v1;
 
-option go_package = "ai-gateway/api/gen/agent/v1;agentv1";
+option go_package = "github.com/yeliheng/go-ai-gateway/api/gen/agent/v1;agentv1";
 
 service AgentService {
   // Streams chat response from the LLM

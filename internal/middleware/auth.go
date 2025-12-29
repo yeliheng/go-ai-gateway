@@ -1,10 +1,11 @@
 package middleware
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/internal/cache"
 	"fmt"
 	"net/http"
+
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/internal/cache"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"

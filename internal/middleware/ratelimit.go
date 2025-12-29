@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"ai-gateway/common/logger"
-	"ai-gateway/internal/limiter"
 	"fmt"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/internal/limiter"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

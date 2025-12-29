@@ -1,17 +1,18 @@
 package identity
 
 import (
-	"ai-gateway/api/gen/identity/v1"
-	"ai-gateway/common/config"
-	"ai-gateway/common/model"
-	"ai-gateway/internal/cache"
-	"ai-gateway/internal/database"
 	"context"
 	"errors"
 	"fmt"
 	"time"
 
-	"ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/api/gen/identity/v1"
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/model"
+	"github.com/yeliheng/go-ai-gateway/internal/cache"
+	"github.com/yeliheng/go-ai-gateway/internal/database"
+
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 
 	"github.com/golang-jwt/jwt/v5"
 	"go.uber.org/zap"

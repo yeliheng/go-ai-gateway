@@ -1,9 +1,10 @@
 package websocket
 
 import (
-	"ai-gateway/api/gen/agent/v1"
-	"ai-gateway/common/logger"
 	"net/http"
+
+	"github.com/yeliheng/go-ai-gateway/api/gen/agent/v1"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"

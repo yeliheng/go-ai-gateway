@@ -1,14 +1,15 @@
 package main
 
 import (
-	"ai-gateway/api/gen/agent/v1"
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
-	"ai-gateway/internal/provider"
-	agentService "ai-gateway/internal/service/agent"
-	"ai-gateway/pkg/telemetry"
 	"fmt"
 	"net"
+
+	"github.com/yeliheng/go-ai-gateway/api/gen/agent/v1"
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/internal/provider"
+	agentService "github.com/yeliheng/go-ai-gateway/internal/service/agent"
+	"github.com/yeliheng/go-ai-gateway/pkg/telemetry"
 
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.uber.org/zap"

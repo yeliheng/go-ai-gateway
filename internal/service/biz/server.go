@@ -1,16 +1,17 @@
 package biz
 
 import (
-	"ai-gateway/api/gen/agent/v1"
-	"ai-gateway/api/gen/identity/v1"
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
-	"ai-gateway/internal/cache"
-	"ai-gateway/internal/handler"
-	"ai-gateway/internal/middleware"
-	"ai-gateway/internal/websocket"
-	"ai-gateway/pkg/telemetry"
 	"fmt"
+
+	"github.com/yeliheng/go-ai-gateway/api/gen/agent/v1"
+	"github.com/yeliheng/go-ai-gateway/api/gen/identity/v1"
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/internal/cache"
+	"github.com/yeliheng/go-ai-gateway/internal/handler"
+	"github.com/yeliheng/go-ai-gateway/internal/middleware"
+	"github.com/yeliheng/go-ai-gateway/internal/websocket"
+	"github.com/yeliheng/go-ai-gateway/pkg/telemetry"
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"

@@ -1,4 +1,4 @@
-module go-ai-gateway
+module github.com/yeliheng/go-ai-gateway
 
 go 1.25.5
 

@@ -1,11 +1,12 @@
 package cache
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
 	"context"
 	"errors"
 	"time"
+
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"

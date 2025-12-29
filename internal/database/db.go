@@ -1,9 +1,10 @@
 package database
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
 	"fmt"
+
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
-	"ai-gateway/internal/service/biz"
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/internal/service/biz"
 
 	"go.uber.org/zap"
 )

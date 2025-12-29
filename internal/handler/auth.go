@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"ai-gateway/api/gen/identity/v1"
 	"net/http"
+
+	"github.com/yeliheng/go-ai-gateway/api/gen/identity/v1"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,7 +1,7 @@
 package websocket
 
 import (
-	"ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 	"sync"
 
 	"go.uber.org/zap"

@@ -1,13 +1,14 @@
 package websocket
 
 import (
-	"ai-gateway/api/gen/agent/v1"
-	"ai-gateway/common/logger"
-	"ai-gateway/pkg/protocol"
 	"context"
 	"encoding/json"
 	"io"
 	"time"
+
+	"github.com/yeliheng/go-ai-gateway/api/gen/agent/v1"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
+	"github.com/yeliheng/go-ai-gateway/pkg/protocol"
 
 	"github.com/gorilla/websocket"
 	"go.uber.org/zap"

@@ -1,11 +1,12 @@
 package limiter
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/internal/cache"
 	"context"
 	"fmt"
 	"time"
+
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/internal/cache"
 )
 
 type Limiter struct {

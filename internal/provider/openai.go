@@ -1,8 +1,6 @@
 package provider
 
 import (
-	"ai-gateway/common/config"
-	"ai-gateway/common/logger"
 	"bufio"
 	"bytes"
 	"context"
@@ -12,6 +10,9 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/yeliheng/go-ai-gateway/common/config"
+	"github.com/yeliheng/go-ai-gateway/common/logger"
 
 	"go.uber.org/zap"
 )
