@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # Infrastructure
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ai_gateway
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ai-gateway-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d ai_gateway"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ai-gateway-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    restart: unless-stopped
+    ports:
+      - "16686:16686" # UI
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - ai-gateway-net
+
+  # Microservices
+  identity:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+      target: identity
+    restart: unless-stopped
+    environment:
+      - SERVICES_IDENTITY_PORT=50051
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=user
+      - DATABASE_PASSWORD=password
+      - DATABASE_DBNAME=ai_gateway
+      - DATABASE_PORT=5432
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "50051:50051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - ai-gateway-net
+
+  agent:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+      target: agent
+    restart: unless-stopped
+    environment:
+      - SERVICES_AGENT_PORT=50052
+      - OPENAI_APITOKEN=${OPENAI_APITOKEN}
+    ports:
+      - "50052:50052"
+    networks:
+      - ai-gateway-net
+
+  biz:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+      target: biz
+    restart: unless-stopped
+    environment:
+      - APP_PORT=8081
+      - APP_NAME=biz
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=user
+      - DATABASE_PASSWORD=password
+      - DATABASE_DBNAME=ai_gateway
+      - DATABASE_PORT=5432
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - ai-gateway-net
+
+  gateway:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+      target: gateway
+    restart: unless-stopped
+    environment:
+      - SERVICES_GATEWAY_PORT=8080
+      - SERVICES_IDENTITY_ADDR=identity:50051
+      - SERVICES_AGENT_ADDR=agent:50052
+      - SERVICES_BIZ_ADDR=biz:8081
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      identity:
+        condition: service_started
+      agent:
+        condition: service_started
+      biz:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    networks:
+      - ai-gateway-net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  ai-gateway-net:
+    driver: bridge

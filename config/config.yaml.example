@@ -1,0 +1,69 @@
+app:
+  name: "ai-gateway"
+  port: ":8080" # Legacy, will separate below
+
+services:
+  gateway:
+    name: "gateway"
+    port: "8080"
+    addr: "localhost:8080"
+  biz:
+    name: "biz"
+    port: "8081"
+    addr: "localhost:8081"
+  identity:
+    name: "identity"
+    port: "50051"
+    addr: "localhost:50051"
+  agent:
+    name: "agent"
+    port: "50052"
+    addr: "localhost:50052"
+  jaeger:
+    addr: "localhost:4317"
+
+auth:
+  tokens:
+    - "123"
+    - "test-token"
+openai:
+  apiToken: "your-api-token"
+  baseUrl: "your-base-url"
+  model: "your-model"
+  systemPrompt: "your-system-prompt"
+
+database:
+  host: "localhost"
+  port: "5432"
+  user: "postgres"
+  password: "postgres"
+  dbname: "ai_gateway"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+
+jwt:
+  secret: "your-jwt-secret"
+  expiryDays: 7
+
+ratelimit:
+  enabled: true
+  default:
+    algo: "token_bucket"
+    rate: 10 # 10 req/s
+    burst: 20
+    key: "ip"
+  rules:
+    - path: "/login"
+      method: "POST"
+      algo: "sliding_window"
+      limit: 5
+      window: "60s" # 1 minute
+      key: "ip"
+    - path: "/chat"
+      algo: "token_bucket"
+      rate: 2
+      burst: 5
+      key: "user_id" # Logged in user limit

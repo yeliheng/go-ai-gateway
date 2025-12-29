@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package agent.v1;
+
+option go_package = "ai-gateway/api/gen/agent/v1;agentv1";
+
+service AgentService {
+  // Streams chat response from the LLM
+  rpc ChatStream(ChatRequest) returns (stream ChatResponse);
+}
+
+message ChatRequest {
+  string model = 1;
+  string content = 2;
+  // Context could be added here later (e.g. user_id, conversation_id)
+}
+
+message ChatResponse {
+  string content = 1;
+  string type = 2; // "text" or "reasoning" (for thinking models)
+  string error = 3; // Empty if success
+}
