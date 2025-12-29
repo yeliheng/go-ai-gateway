@@ -1,4 +1,4 @@
-module ai-gateway
+module go-ai-gateway
 
 go 1.25.5
 
